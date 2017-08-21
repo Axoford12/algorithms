@@ -1,18 +1,14 @@
-#include "graph/dense_graph.h"
-#include <stdlib.h>
+#include "graph/sparse_graph.h"
 
 int main(){
-    dense_graph dg;
-    dense_graph_construct(&dg,10,0);
-    dense_graph_add_edge(&dg,0,2);
-    dense_graph_add_edge(&dg,0,3);
-    dense_graph_add_edge(&dg,2,5);
-    dense_graph_add_edge(&dg,2,4);
-    dense_graph_print_graph(&dg);
-    list* lst;
-    lst = dense_graph_get_adj(&dg,2);
-    dense_graph_dfs(&dg,0);
-    free(lst);
-    dense_graph_destruct(&dg);
+    sparse_graph sg;
+    sparse_graph_construct(&sg,10,0);
+    sparse_graph_add_edge(&sg,0,3);
+    sparse_graph_add_edge(&sg,2,4);
+    sparse_graph_add_edge(&sg,3,2);
+    sparse_graph_print_graph(&sg);
+    sparse_graph_dfs(&sg,0);
+
+    sparse_graph_destruct(&sg);
 }
 

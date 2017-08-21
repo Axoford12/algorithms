@@ -3,9 +3,11 @@
 //
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include "sparse_graph.h"
 
 void sparse_graph_construct(sparse_graph* sg,unsigned int num,int directed){
+    sg->visited = malloc(sizeof(int) * num);
     sg->edge_num = 0;
     sg->directed = directed;
     sg->vertex_num = num;
@@ -28,13 +30,30 @@ void sparse_graph_destruct(sparse_graph *sg) {
         list_destruct(sg->graph[i]);
     }
     free(sg->graph);
+    free(sg->visited);
 }
 
 void sparse_graph_add_edge(sparse_graph *sg, unsigned int x, unsigned int y) {
     if(x > sg->vertex_num || y > sg->vertex_num) return;
     sg->graph[x] = list_append(sg->graph[x],y);
     if(!sg->directed){
-        sg->graph[x] = list_append(sg->graph[y],x);
+        sg->graph[y] = list_append(sg->graph[y],x);
     }
     sg->edge_num++;
 }
+
+list *sparse_graph_get_adj(sparse_graph *sg, unsigned int vertex) {
+    assert(vertex < sg->vertex_num - 1);
+    return sg->graph[vertex];
+}
+
+void sparse_graph_dfs(sparse_graph *sg, unsigned int vertex) {
+    printf("Visit %d\n",vertex);
+    sg->visited[vertex] = 1;
+    for (struct node* n = list_iterator_start(sparse_graph_get_adj(sg,vertex));!list_iterator_end(n);n=list_iterator_next(n)) {
+        if(!sg->visited[n->value]){
+            sparse_graph_dfs(sg,(unsigned)n->value);
+        }
+    }
+}
+

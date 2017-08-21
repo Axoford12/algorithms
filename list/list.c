@@ -51,6 +51,7 @@ void list_destruct(list *lst) {
         return;
     }
     for (int i = 0; i < lst->len; i++) {
+        if(lst->first == NULL) return;
         lst->first = lst->first->next_addr;
         free(lst->first);
     }
