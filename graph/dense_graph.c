@@ -80,3 +80,18 @@ list* dense_graph_get_adj(dense_graph *dg, unsigned int vertex) {
     }
     return lst;
 }
+
+int dense_graph_component(dense_graph *dg) {
+    for (int i = 0; i < dg->vertex_num; ++i) {
+        dg->visited[i] = 0;
+    }
+    int count = 0;
+    for (int j = 0; j < dg->vertex_num; ++j) {
+        if(!dg->visited[j]){
+            dense_graph_dfs(dg,j);
+            count++;
+        }
+
+    }
+    return count;
+}

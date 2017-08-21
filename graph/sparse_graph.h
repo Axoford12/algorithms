@@ -58,4 +58,9 @@ list* sparse_graph_get_adj(sparse_graph *sg, unsigned int vertex);
  * @param vertex
  */
 void sparse_graph_dfs(sparse_graph *sg,unsigned int vertex);
+/**
+ * 求sg图的联通分量
+ * @param sg
+ */
+int sparse_graph_component(sparse_graph *sg);
 #endif //STUDY_SPARSE_GRAPH_H

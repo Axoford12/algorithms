@@ -71,4 +71,5 @@ void dense_graph_dfs(dense_graph *dg, unsigned int vertex);
  */
 list* dense_graph_get_adj(dense_graph *dg, unsigned int vertex);
 
+int dense_graph_component(dense_graph* dg);
 #endif //STUDY_DENSE_GRAPH_H

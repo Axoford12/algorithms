@@ -43,7 +43,7 @@ void sparse_graph_add_edge(sparse_graph *sg, unsigned int x, unsigned int y) {
 }
 
 list *sparse_graph_get_adj(sparse_graph *sg, unsigned int vertex) {
-    assert(vertex < sg->vertex_num - 1);
+    assert(vertex < sg->vertex_num);
     return sg->graph[vertex];
 }
 
@@ -55,5 +55,21 @@ void sparse_graph_dfs(sparse_graph *sg, unsigned int vertex) {
             sparse_graph_dfs(sg,(unsigned)n->value);
         }
     }
+}
+
+int sparse_graph_component(sparse_graph *sg) {
+    for (int j = 0; j < sg->vertex_num; ++j) {
+        sg->visited[j] = 0;
+    }
+    int count = 0;
+    for (int i = 0; i < sg->vertex_num; ++i) {
+        printf("Count: %d\n",count);
+        if(!sg->visited[i]){
+            sparse_graph_dfs(sg,i);
+            count++;
+        }
+    }
+    return count;
+
 }
 

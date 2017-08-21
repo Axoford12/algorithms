@@ -121,6 +121,9 @@ list* list_append(list* lst, int value) {
 }
 
 struct node *list_iterator_start(list *lst) {
+    if(lst == NULL){
+        return NULL;
+    }
     return lst->first;
 }
 
