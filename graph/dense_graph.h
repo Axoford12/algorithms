@@ -9,6 +9,7 @@
 
 typedef struct {
     int* visited;
+    int* from;
     int directed;
     int edge_num;
     int vertex_num;
@@ -70,6 +71,12 @@ void dense_graph_dfs(dense_graph *dg, unsigned int vertex);
  * @return 返回临边数组的首指针
  */
 list* dense_graph_get_adj(dense_graph *dg, unsigned int vertex);
-
+/**
+ * 求出dg图的连通分量数
+ * @param dg
+ * @return
+ */
 int dense_graph_component(dense_graph* dg);
+
+list* dense_graph_find_path(dense_graph* dg,unsigned int x,unsigned int y,list* list);
 #endif //STUDY_DENSE_GRAPH_H

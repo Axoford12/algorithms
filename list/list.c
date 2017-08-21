@@ -18,6 +18,7 @@ struct node *__list_pos(list *lst, unsigned int pos) {
 }
 
 void __list_print(struct node *node) {
+    assert(node != NULL);
     if (node->next_addr == NULL) {
         printf("%d", node->value);
         return;
